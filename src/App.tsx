@@ -1,35 +1,44 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import LoadingSection from "./components/section/LoadingSection";
+import MainCoverSection from "./components/section/MainCoverSection";
+import IntroductionSection from "./components/section/IntroductionSection";
+import CalendarSection from "./components/section/CalendarSection";
+import GallerySlickSection from "./components/section/GallerySlickSection";
+import LocationSection from "./components/section/LocationSection";
+import AccountSection from "./components/section/AccountSection";
+import ClosingSection from "./components/section/ClosingSection";
+import FooterSection from "./components/section/FooterSection";
+import FloatingButtons from "./components/common/FloatingButtons";
+import {
+  gallery,
+  participants,
+  transportation,
+  weddingInfo,
+} from "./utils/data";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [isLoaded, setIsLoaded] = useState(true);
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      {!isLoaded && <LoadingSection onFinish={() => setIsLoaded(true)} />}
+      {isLoaded && (
+        <>
+          <main className="relative flex flex-col max-w-md w-full min-h-[100vh] mx-auto bg-background items-center">
+            <MainCoverSection info={weddingInfo} />
+            <IntroductionSection contacts={participants} info={weddingInfo} />
+            <CalendarSection info={weddingInfo} />
+            <GallerySlickSection img={gallery} />
+            <LocationSection info={weddingInfo} trans={transportation} />
+            <AccountSection parts={participants} />
+            <ClosingSection info={weddingInfo} />
+          </main>
+          <FooterSection msg={weddingInfo.message.footer} />
+          <FloatingButtons />
+        </>
+      )}
     </>
-  )
+  );
 }
 
-export default App
+export default App;
