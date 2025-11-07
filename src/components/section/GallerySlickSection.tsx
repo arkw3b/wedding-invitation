@@ -54,7 +54,7 @@ export default function GallerySlickSection({ img }: GalleryProps) {
         <Slider
           {...mainSettings}
           asNavFor={nav2 as Slider}
-          ref={(slider1) => setNav1(slider1)}
+          ref={(slider: Slider | null) => setNav1(slider)}
           className="mt-14"
         >
           {img.map((src, i) => (
@@ -77,7 +77,7 @@ export default function GallerySlickSection({ img }: GalleryProps) {
           <Slider
             {...thumbSettings}
             asNavFor={nav1 as Slider}
-            ref={(slider2) => setNav2(slider2)}
+            ref={(slider: Slider | null) => setNav2(slider)}
           >
             {img.map((src, i) => (
               <div key={i} className="px-1">
