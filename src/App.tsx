@@ -17,7 +17,7 @@ import {
 } from "./utils/data";
 
 function App() {
-  const [isLoaded, setIsLoaded] = useState(true);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   return (
     <>
